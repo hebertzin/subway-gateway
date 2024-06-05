@@ -12,6 +12,7 @@ export async function seedRoles() {
         description: 'Responsible for managing a resource'
       },
       {
+        id: 'faf787c0-6b97-4dae-84e4-ca947c790bf2',
         name: 'Train Operator',
         description: 'Responsible for operating the train'
       },

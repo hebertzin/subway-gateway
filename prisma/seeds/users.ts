@@ -21,7 +21,7 @@ export async function seedUsers() {
         city: "São Paulo",
         postal_code: "11714140",
         gender: "Masculino",
-        date_of_birth: new Date("2004-10-13"),
+        date_of_birth: '13/10/2004',
         languages: "Português",
       },
       {
@@ -37,7 +37,7 @@ export async function seedUsers() {
         city: "Rio de Janeiro",
         postal_code: "20040002",
         gender: "Feminino",
-        date_of_birth: new Date("1995-05-23"),
+        date_of_birth: '03/04/2000',
         languages: "Português, Inglês",
       },
     ],

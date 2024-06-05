@@ -36,7 +36,7 @@ model Users {
   city          String
   postal_code   String
   gender        String
-  date_of_birth DateTime
+  date_of_birth String
   languages     String
   createdAt     DateTime @default(now())
   updateAt      DateTime @updatedAt
