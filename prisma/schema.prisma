@@ -14,8 +14,30 @@ datasource db {
 }
 
 model Roles {
-  id String @unique @default(uuid())
-  name String
+  id          String   @unique @default(uuid())
+  name        String
   description String
-  createAt DateTime @default(now())
+  createAt    DateTime @default(now())
+  Users       Users[]
+}
+
+model Users {
+  id            String   @id @default(uuid())
+  username      String
+  password      String
+  email         String   @unique
+  role_id       String?
+  role          Roles?   @relation(fields: [role_id], references: [id])
+  phone         String
+  street        String
+  country       String
+  nationality   String
+  state         String
+  city          String
+  postal_code   String
+  gender        String
+  date_of_birth DateTime
+  languages     String
+  createdAt     DateTime @default(now())
+  updateAt      DateTime @updatedAt
 }
