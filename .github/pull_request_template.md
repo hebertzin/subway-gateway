@@ -1,9 +1,9 @@
 **Description**
 
-description here
+description what you did here
 
 [**Trello Item**](card_url_item)
 
 More information:
 
-•⁠  ⁠[Trello Project](trello_url)
+- ⁠[Trello Project](trello_url)
