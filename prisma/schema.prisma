@@ -14,6 +14,7 @@ datasource db {
 }
 
 model Roles {
+
   id          String   @unique @default(uuid())
   name        String
   description String
@@ -42,3 +43,4 @@ model Users {
   createdAt     DateTime @default(now())
   updateAt      DateTime @updatedAt
 }
+
