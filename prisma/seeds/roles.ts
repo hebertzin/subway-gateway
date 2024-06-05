@@ -36,3 +36,12 @@ export async function seedRoles() {
 
   console.log("Roles seeded successfully");
 }
+
+seedRoles()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

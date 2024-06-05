@@ -19,6 +19,7 @@ model Roles {
   description String
   createAt    DateTime @default(now())
   Users       Users[]
+  updateAt    DateTime @updatedAt
 }
 
 model Users {
