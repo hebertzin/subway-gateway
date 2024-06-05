@@ -8,7 +8,8 @@
     "seed": "ts-node prisma/seed.ts",
     "migrate": "prisma migrate deploy",
     "migrate:dev": "prisma migrate dev",
-    "reset":"prisma migrate reset --force & npm run seed"
+    "reset":"prisma migrate reset --force & npm run seed",
+    "studio": "prisma studio && npm run seed"
   },
   "keywords": [],
   "author": "",
