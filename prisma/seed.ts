@@ -1,9 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { seedRoles } from './seeds/roles';
 import { seedUsers } from './seeds/users';
-
-
-
 async function main() {
   await seedRoles();
   await seedUsers()
