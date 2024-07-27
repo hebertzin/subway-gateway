@@ -1,0 +1,17 @@
+name: Prevent Migration Deletion
+
+on:
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  check-deletion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check for deleted migrations
+        run: |
+          if git diff --name-status ${{ github.event.before }} ${{ github.sha }} | grep "^D.*migrations/"; then
+            echo "Erro: Arquivos de migrations não podem ser deletados."
+            exit 1
+          fi
