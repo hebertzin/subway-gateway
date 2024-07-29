@@ -1,17 +1,32 @@
-name: Prevent Migration Deletion
+name: Migrations Protection
 
 on:
-  push:
+  pull_request:
     branches: ["main", "develop"]
+    paths:
+      - "prisma/migrations/**"
 
 jobs:
-  check-deletion:
-    runs-on: ubuntu-latest
+  check:
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@v2
-      - name: Check for deleted migrations
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all branches
+        run: git fetch origin +refs/heads/*:refs/remotes/origin/*
+
+      - name: Check for deleted migration files
         run: |
-          if git diff --name-status ${{ github.event.before }} ${{ github.sha }} | grep "^D.*migrations/"; then
-            echo "Erro: Arquivos de migrations não podem ser deletados."
+          BASE_SHA=$(git rev-parse origin/${{ github.event.pull_request.base.ref }})
+          HEAD_SHA=$(git rev-parse HEAD)
+          DELETED_FILES=$(git diff --name-status $BASE_SHA $HEAD_SHA | grep "^D" | grep "prisma/migrations/" || true)
+          if [ -n "$DELETED_FILES" ]; then
+            echo "Migration files have been deleted, which is not allowed:"
+            echo "$DELETED_FILES"
             exit 1
+          else
+            echo "No migration files were deleted."
           fi
