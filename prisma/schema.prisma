@@ -19,3 +19,16 @@ model Roles {
   description String
   createAt DateTime @default(now())
 }
+
+model Manufacturer {
+  id           String  @unique @default(uuid())
+  name         String
+  phone        String
+  email        String
+  street       String
+  number       String
+  city         String
+  state        String
+  zip_code     String
+  website      String
+}
