@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:seed": "ts-node prisma/seed.ts",
     "db:migrate": "prisma migrate dev",
-    "db:all":"npm run db:migrate & npm run db:seed",
-    "db:down":"npx prisma migrate reset --force"
+    "db:all": "npm run db:migrate & npm run db:seed",
+    "db:down": "npx prisma migrate reset --force"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,7 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.1",
     "prisma": "^5.15.0",
