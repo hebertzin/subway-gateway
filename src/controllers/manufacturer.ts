@@ -1,8 +1,8 @@
 import { Request } from "express";
-import { ManufacturerCreateInput } from "../repositories/manufacturer";
 import { Controller, HttpResponse } from "../domain/controller";
-import { IManufacturerService } from "../services/manufacturer";
 import { HttpStatusCode } from "../domain/http";
+import { ManufacturerCreateInput } from "../repositories/manufacturer";
+import { IManufacturerService } from "../services/manufacturer";
 
 export class ManufacturerController implements Controller {
   constructor(readonly manufacturerService: IManufacturerService) {}
@@ -18,8 +18,8 @@ export class ManufacturerController implements Controller {
       };
     } catch (error) {
       return {
-        msg: "Failed to create manufacturer",
-        statusCode: HttpStatusCode.InternalServerError,
+        msg: error.message,
+        statusCode: error.code,
         body: error,
       };
     }

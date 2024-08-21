@@ -1,3 +1,5 @@
+import { HttpStatusCode } from "../domain/http";
+import { AppError } from "../errors/errors";
 import {
   IManufacturerRepository,
   Manufacturer,
@@ -11,7 +13,14 @@ export interface IManufacturerService {
 export class ManufacturerService implements IManufacturerService {
   constructor(readonly manufacturerRepository: IManufacturerRepository) {}
   async invoke(data: ManufacturerCreateInput): Promise<Manufacturer> {
-    const manufacturer = await this.manufacturerRepository.create(data);
-    return manufacturer;
+    try {
+      const manufacturer = await this.manufacturerRepository.create(data);
+      return manufacturer;
+    } catch (error) {
+       throw new AppError(
+        "Some error has been ocurred trying create a manufacturer",
+        HttpStatusCode.InternalServerError
+      );
+    }
   }
 }
