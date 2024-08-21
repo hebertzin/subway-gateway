@@ -2,6 +2,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export type Manufacturer =  {
+  manufacturer : ManufacturerCreateInput;
+}
+
 export type ManufacturerCreateInput = {
   name: string;
   phone: string;
@@ -14,11 +18,14 @@ export type ManufacturerCreateInput = {
   website: string;
 };
 
-export class ManufacturerRepository {
-  async create(data: ManufacturerCreateInput) {
-    const manufacturer = await prisma.manufacturer.create({
-      data: data,
-    });
-    return manufacturer;
+
+export interface IManufacturerRepository {
+  create(data: ManufacturerCreateInput): Promise<Manufacturer>;
+}
+
+export class ManufacturerRepository implements IManufacturerRepository {
+  async create(data: ManufacturerCreateInput): Promise<Manufacturer> {
+    const manufacturer = await prisma.manufacturer.create({ data })
+    return { manufacturer};
   }
 }
