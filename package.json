@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "ts-node prisma/seed.ts",
-    "migrate": "prisma migrate deploy",
-    "migrate:dev": "prisma migrate dev",
-    "reset":"prisma migrate reset --force & npm run seed"
+    "db:seed": "ts-node prisma/seed.ts",
+    "db:migrate": "prisma migrate dev",
+    "db:all":"npm run db:migrate & npm run db:seed",
+    "db:down":"npx prisma migrate reset --force"
   },
   "keywords": [],
   "author": "",

@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,21 +8,43 @@ datasource db {
 }
 
 model Roles {
-  id String @unique @default(uuid())
-  name String
+  id          String   @unique @default(uuid())
+  name        String
   description String
-  createAt DateTime @default(now())
+  createAt    DateTime @default(now())
+  Users       Users[]
+}
+
+model Users {
+  id            String   @id @default(uuid())
+  username      String
+  password      String
+  email         String   @unique
+  role_id       String?
+  role          Roles?   @relation(fields: [role_id], references: [id])
+  phone         String
+  street        String
+  country       String
+  nationality   String
+  state         String
+  city          String
+  postal_code   String
+  gender        String
+  date_of_birth String
+  languages     String
+  createdAt     DateTime @default(now())
+  updateAt      DateTime @updatedAt
 }
 
 model Manufacturer {
-  id           String  @unique @default(uuid())
-  name         String
-  phone        String
-  email        String
-  street       String
-  number       String
-  city         String
-  state        String
-  zip_code     String
-  website      String
+  id       String @unique @default(uuid())
+  name     String
+  phone    String
+  email    String
+  street   String
+  number   String
+  city     String
+  state    String
+  zip_code String
+  website  String
 }
