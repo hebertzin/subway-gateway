@@ -37,14 +37,16 @@ model Users {
 }
 
 model Manufacturer {
-  id       String @unique @default(uuid())
-  name     String
-  phone    String
-  email    String
-  street   String
-  number   String
-  city     String
-  state    String
-  zip_code String
-  website  String
+  id        String   @unique @default(uuid())
+  name      String
+  phone     String
+  email     String
+  street    String
+  number    String
+  city      String
+  state     String
+  zip_code  String
+  website   String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
