@@ -11,7 +11,7 @@ export interface IManufacturerService {
   invoke(data: ManufacturerCreateInput): Promise<Manufacturer>;
 }
 
-export class ManufacturerService implements IManufacturerService {
+export class CreateManufacturerService implements IManufacturerService {
   constructor(
     readonly manufacturerRepository: IManufacturerRepository,
     readonly logging: ILogger
