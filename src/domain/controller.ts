@@ -1,9 +1,9 @@
 export interface HttpResponse {
   statusCode: number;
   msg: string;
-  body?: any;
+  body?: unknown;
 }
 
-export interface Controller<T = any> {
+export interface Controller<T = unknown> {
   handle(request: T): Promise<HttpResponse>;
 }

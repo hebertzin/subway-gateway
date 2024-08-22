@@ -1,4 +1,5 @@
 import { HttpStatusCode } from "../domain/http";
+import { ILogger } from "../domain/logger";
 import { AppError } from "../errors/errors";
 import {
   IManufacturerRepository,
@@ -11,13 +12,17 @@ export interface IManufacturerService {
 }
 
 export class ManufacturerService implements IManufacturerService {
-  constructor(readonly manufacturerRepository: IManufacturerRepository) {}
+  constructor(
+    readonly manufacturerRepository: IManufacturerRepository,
+    readonly logging: ILogger
+  ) {}
   async invoke(data: ManufacturerCreateInput): Promise<Manufacturer> {
     try {
       const manufacturer = await this.manufacturerRepository.create(data);
       return manufacturer;
     } catch (error) {
-       throw new AppError(
+      this.logging.error(`error when trying to create manufacturer ${error}`);
+      throw new AppError(
         "Some error has been ocurred trying create a manufacturer",
         HttpStatusCode.InternalServerError
       );
