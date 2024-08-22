@@ -2,8 +2,15 @@ import { Request } from "express";
 import { z } from "zod";
 import { Controller, HttpResponse } from "../domain/controller";
 import { HttpStatusCode } from "../domain/http";
-import { ManufacturerCreateInput } from "../repositories/manufacturer";
-import { IManufacturerService } from "../services/manufacturer";
+import { loggerService } from "../logging/logger";
+import {
+  ManufacturerCreateInput,
+  ManufacturerRepository,
+} from "../repositories/manufacturer";
+import {
+  CreateManufacturerService,
+  IManufacturerService,
+} from "../services/manufacturer";
 
 const manufacturerSchemaValidation = z.object({
   name: z.string().min(1, "Name is required"),
@@ -17,7 +24,7 @@ const manufacturerSchemaValidation = z.object({
   website: z.string().url("Invalid website URL"),
 });
 
-export class ManufacturerController implements Controller {
+export class CreateManufacturerController implements Controller {
   constructor(readonly manufacturerService: IManufacturerService) {}
 
   async handle(request: Request): Promise<HttpResponse> {
@@ -34,8 +41,12 @@ export class ManufacturerController implements Controller {
     } catch (error) {
       return {
         msg: error.message,
-        statusCode: error.code,
+        statusCode: error.statusCode,
       };
     }
   }
 }
+
+export const createManufacturerHandler = new CreateManufacturerController(
+  new CreateManufacturerService(new ManufacturerRepository(), loggerService)
+);
