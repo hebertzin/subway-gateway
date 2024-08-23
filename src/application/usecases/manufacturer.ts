@@ -1,11 +1,11 @@
-import { HttpStatusCode } from "../domain/http";
-import { ILogger } from "../domain/logger";
-import { AppError } from "../errors/errors";
+import { HttpStatusCode } from "../../domain/http";
+import { ILogger } from "../../domain/logger";
 import {
   IManufacturerRepository,
   Manufacturer,
   ManufacturerCreateInput,
-} from "../repositories/manufacturer";
+} from "../../infra/repositories/manufacturer";
+import { AppError } from "../errors/errors";
 
 export interface IManufacturerService {
   invoke(data: ManufacturerCreateInput): Promise<Manufacturer>;
