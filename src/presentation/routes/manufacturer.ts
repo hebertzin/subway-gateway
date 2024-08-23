@@ -1,9 +1,7 @@
 import { Request, Response, Router } from "express";
-import {
-  createManufacturerHandler,
-  manufacturerSchemaValidation,
-} from "../controllers/manufacturer";
+import { createManufacturerHandler } from "../controllers/manufacturer";
 import { DataValidator } from "../middlewares/zod-error";
+import { manufacturerSchemaValidation } from "../validations/manufacturer";
 
 export const manufacturerRoutes = Router();
 
