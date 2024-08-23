@@ -7,23 +7,24 @@ import {
 } from "../../infra/repositories/manufacturer";
 import { AppError } from "../errors/errors";
 
-export interface IManufacturerService {
-  invoke(data: ManufacturerCreateInput): Promise<Manufacturer>;
+export interface IManufacturerUseCase {
+  execute(data: ManufacturerCreateInput): Promise<Manufacturer>;
 }
 
-export class CreateManufacturerService implements IManufacturerService {
+export class CreateManufacturerUseCase implements IManufacturerUseCase {
   constructor(
-    readonly manufacturerRepository: IManufacturerRepository,
-    readonly logging: ILogger
+    private readonly manufacturerRepository: IManufacturerRepository,
+    private readonly logger: ILogger
   ) {}
-  async invoke(data: ManufacturerCreateInput): Promise<Manufacturer> {
+
+  async execute(data: ManufacturerCreateInput): Promise<Manufacturer> {
     try {
       const manufacturer = await this.manufacturerRepository.create(data);
       return manufacturer;
     } catch (error) {
-      this.logging.error(`error when trying to create manufacturer ${error}`);
+      this.logger.error(`Error when trying to create manufacturer: ${error}`);
       throw new AppError(
-        "Some error has been ocurred trying create a manufacturer",
+        "An error occurred while trying to create a manufacturer",
         HttpStatusCode.InternalServerError
       );
     }

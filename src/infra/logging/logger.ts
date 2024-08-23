@@ -1,7 +1,7 @@
 import { Logger, createLogger, format, transports } from "winston";
-import { ILogger } from "../domain/logger";
+import { ILogger } from "../../domain/logger";
 
-class LoggerService implements ILogger {
+export class LoggerService implements ILogger {
   private logger: Logger;
 
   constructor() {
@@ -47,4 +47,3 @@ class LoggerService implements ILogger {
   }
 }
 
-export const loggerService = new LoggerService();
