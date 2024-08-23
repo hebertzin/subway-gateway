@@ -1,16 +1,13 @@
 import { Request } from "express";
 import { z } from "zod";
-import { Controller, HttpResponse } from "../../domain/controller";
-import { HttpStatusCode } from "../../domain/http";
-import { loggerService } from "../../infra/logging/logger";
-import {
-  ManufacturerCreateInput,
-  ManufacturerRepository,
-} from "../../repositories/manufacturer";
 import {
   CreateManufacturerService,
   IManufacturerService,
-} from "../../services/manufacturer";
+} from "../../application/usecases/manufacturer";
+import { Controller, HttpResponse } from "../../domain/controller";
+import { HttpStatusCode } from "../../domain/http";
+import { loggerService } from "../../infra/logging/logger";
+import { ManufacturerCreateInput, ManufacturerRepository } from "../../infra/repositories/manufacturer";
 
 const manufacturerSchemaValidation = z.object({
   name: z.string().min(1, "Name is required"),
