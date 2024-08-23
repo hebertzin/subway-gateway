@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
-import { HttpStatusCode } from "../domain/http";
+import { HttpStatusCode } from "../../domain/http";
 
 class ZodErrorHandler {
   public handle(err: unknown, _req: Request, res: Response, next: NextFunction) {
