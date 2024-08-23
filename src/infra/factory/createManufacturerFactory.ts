@@ -4,7 +4,7 @@ import { CreateManufacturerController } from "../../presentation/controllers/man
 import { LoggerService } from "../logging/logger";
 import { IManufacturerRepository, ManufacturerRepository } from "../repositories/manufacturer";
 
-export class CreateManufacturerFactory {
+class CreateManufacturerFactoryController {
   constructor(
     private readonly manufacturerRepository: IManufacturerRepository,
     private readonly loggerService: ILogger
@@ -20,7 +20,7 @@ export class CreateManufacturerFactory {
   }
 }
 
-export const createManufacturerFactory = new CreateManufacturerFactory(
+export const createManufacturerFactoryController = new CreateManufacturerFactoryController(
   new ManufacturerRepository(),
   new LoggerService()
 );

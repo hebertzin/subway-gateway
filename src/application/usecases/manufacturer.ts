@@ -7,11 +7,11 @@ import {
 } from "../../infra/repositories/manufacturer";
 import { AppError } from "../errors/errors";
 
-export interface IManufacturerUseCase {
+export interface IAddManufacturerUseCase {
   execute(data: ManufacturerCreateInput): Promise<Manufacturer>;
 }
 
-export class CreateManufacturerUseCase implements IManufacturerUseCase {
+export class CreateManufacturerUseCase implements IAddManufacturerUseCase {
   constructor(
     private readonly manufacturerRepository: IManufacturerRepository,
     private readonly logger: ILogger
