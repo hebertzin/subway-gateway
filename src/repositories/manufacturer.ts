@@ -1,4 +1,4 @@
-import { prisma } from "../database/prisma";
+import { prisma } from "../infra/database/prisma";
 
 export type Manufacturer = {
   manufacturer: ManufacturerCreateInput;

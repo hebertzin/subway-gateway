@@ -2,14 +2,14 @@ import { Request } from "express";
 import { z } from "zod";
 import { Controller, HttpResponse } from "../../domain/controller";
 import { HttpStatusCode } from "../../domain/http";
-import { loggerService } from "../../logging/logger";
+import { loggerService } from "../../infra/logging/logger";
 import {
-    ManufacturerCreateInput,
-    ManufacturerRepository,
+  ManufacturerCreateInput,
+  ManufacturerRepository,
 } from "../../repositories/manufacturer";
 import {
-    CreateManufacturerService,
-    IManufacturerService,
+  CreateManufacturerService,
+  IManufacturerService,
 } from "../../services/manufacturer";
 
 const manufacturerSchemaValidation = z.object({
