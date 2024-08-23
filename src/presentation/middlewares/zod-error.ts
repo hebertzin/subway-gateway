@@ -1,23 +1,33 @@
-import { NextFunction, Request, Response } from "express";
-import { ZodError } from "zod";
-import { HttpStatusCode } from "../../domain/http";
+import { NextFunction, Request, Response } from 'express';
+import { ZodError, z } from 'zod';
+import { HttpStatusCode } from '../../domain/http';
 
-class ZodErrorHandler {
-  public handle(err: unknown, _req: Request, res: Response, next: NextFunction) {
-    if (err instanceof ZodError) {
-      const formattedErrors = err.errors.map((e) => ({
-        path: e.path.join("."),
-        message: e.message,
-      }));
+export class DataValidator<T extends z.ZodTypeAny> {
+  private schema: T;
 
-      return res.status(HttpStatusCode.BadRequest).json({
-        msg: "Validation error",
-        errors: formattedErrors,
-      });
-    }
+  constructor(schema: T) {
+    this.schema = schema;
+  }
 
-    next(err);
+  validate() {
+    return (req: Request, res: Response, next: NextFunction) => {
+      try {
+        this.schema.parse(req.body);
+        next();
+      } catch (error) {
+        if (error instanceof ZodError) {
+          const errorMessages = error.errors.map((issue) => ({
+            message: `${issue.path.join('.')} is ${issue.message}`,
+          }));
+          res
+            .status(HttpStatusCode.BadRequest)
+            .json({ error: 'Invalid data', details: errorMessages });
+        } else {
+          res
+            .status(HttpStatusCode.InternalServerError)
+            .json({ error: 'Internal Server Error' });
+        }
+      }
+    };
   }
 }
-
-export const zodErrorHandler = new ZodErrorHandler();
