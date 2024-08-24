@@ -1,14 +1,14 @@
 import { AddManufacturerUseCase } from "../../application/usecases/manufacturer";
-import { CreateManufacturerController } from "../../presentation/controllers/manufacturer";
+import { AddManufacturerController } from "../../presentation/controllers/manufacturer";
 import { LoggerService } from "../logging/logger";
 import { ManufacturerRepository } from "../repositories/manufacturer";
 
-export const createManufacturerController = (): CreateManufacturerController => {
+export const createManufacturerController = (): AddManufacturerController => {
   const manufacturerRepository = new ManufacturerRepository();
   const loggerService = new LoggerService();
   const createManufacturerUseCase = new AddManufacturerUseCase(
     manufacturerRepository,
     loggerService
   );
-  return new CreateManufacturerController(createManufacturerUseCase);
+  return new AddManufacturerController(createManufacturerUseCase);
 };

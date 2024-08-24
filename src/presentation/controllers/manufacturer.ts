@@ -4,7 +4,7 @@ import { Controller, HttpResponse } from "../../domain/controller";
 import { HttpStatusCode } from "../../domain/http";
 import { ManufacturerCreateInput } from "../../infra/repositories/manufacturer";
 
-export class CreateManufacturerController implements Controller {
+export class AddManufacturerController implements Controller {
   constructor(readonly addManufacturerUseCase: IAddManufacturerUseCase) {}
 
   async handle(request: Request): Promise<HttpResponse> {
