@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { createManufacturerFactoryController } from "../../infra/factory/createManufacturerFactory";
+import { createManufacturerController } from "../../infra/factory/createManufacturerFactory";
 import { DataValidator, ZodValidator } from "../middlewares/zod-error";
 import { manufacturerSchemaValidation } from "../validations/manufacturer";
 
@@ -9,7 +9,7 @@ manufacturerRoutes.post(
   "/",
   new DataValidator(new ZodValidator(manufacturerSchemaValidation)).validate(),
   async (req: Request, res: Response) => {
-    const createManufacturerHandler = createManufacturerFactoryController.create();
+    const createManufacturerHandler = createManufacturerController();
 
     const httpResponse = await createManufacturerHandler.handle(req);
 

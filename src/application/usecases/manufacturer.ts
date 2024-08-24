@@ -11,7 +11,7 @@ export interface IAddManufacturerUseCase {
   execute(data: ManufacturerCreateInput): Promise<Manufacturer>;
 }
 
-export class CreateManufacturerUseCase implements IAddManufacturerUseCase {
+export class AddManufacturerUseCase implements IAddManufacturerUseCase {
   constructor(
     private readonly manufacturerRepository: IManufacturerRepository,
     private readonly logger: ILogger
