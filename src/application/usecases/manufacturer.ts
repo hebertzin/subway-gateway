@@ -1,10 +1,7 @@
 import { HttpStatusCode } from "../../domain/http";
 import { ILogger } from "../../domain/logger";
-import {
-  IManufacturerRepository,
-  Manufacturer,
-  ManufacturerCreateInput,
-} from "../../infra/repositories/manufacturer";
+import { Manufacturer, ManufacturerCreateInput } from "../../domain/manufacturer";
+import { IManufacturerRepository } from "../../infra/repositories/manufacturer";
 import { AppError } from "../errors/errors";
 
 export interface IAddManufacturerUseCase {
