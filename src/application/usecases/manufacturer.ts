@@ -1,11 +1,11 @@
 import { HttpStatusCode } from "../../domain/http";
 import { ILogger } from "../../domain/logger";
-import { Manufacturer, ManufacturerCreateInput } from "../../domain/manufacturer";
+import { CreateManufacturerInput, Manufacturer } from "../../domain/manufacturer";
 import { IManufacturerRepository } from "../../infra/repositories/manufacturer";
 import { AppError } from "../errors/errors";
 
 export interface IAddManufacturerUseCase {
-  execute(data: ManufacturerCreateInput): Promise<Manufacturer>;
+  execute(data: CreateManufacturerInput): Promise<Manufacturer>;
 }
 
 export class AddManufacturerUseCase implements IAddManufacturerUseCase {
@@ -13,8 +13,8 @@ export class AddManufacturerUseCase implements IAddManufacturerUseCase {
     private readonly manufacturerRepository: IManufacturerRepository,
     private readonly logger: ILogger
   ) {}
-
-  async execute(data: ManufacturerCreateInput): Promise<Manufacturer> {
+  
+  async execute(data: CreateManufacturerInput): Promise<Manufacturer> {
     try {
       const manufacturer = await this.manufacturerRepository.create(data);
       return manufacturer;

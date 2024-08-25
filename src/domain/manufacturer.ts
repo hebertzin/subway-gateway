@@ -1,8 +1,8 @@
 export type Manufacturer = {
-  manufacturer: ManufacturerCreateInput;
+  manufacturer: CreateManufacturerInput;
 };
 
-export type ManufacturerCreateInput = {
+export type CreateManufacturerInput = {
   name: string;
   phone: string;
   email: string;
