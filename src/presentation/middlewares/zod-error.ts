@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
-import { ZodError, z } from 'zod';
-import { HttpStatusCode } from '../../domain/http';
-import { Validator } from '../../domain/validator';
+import { NextFunction, Request, Response } from "express";
+import { ZodError, z } from "zod";
+import { HttpStatusCode } from "../../domain/http";
+import { Validator } from "../../domain/validator";
+import { manufacturerSchemaValidation } from "../validations/manufacturer";
 
 export class ZodValidator<T> implements Validator<T> {
   private schema: z.ZodSchema<T>;
@@ -44,3 +45,7 @@ export class DataValidator<T> {
     };
   }
 }
+
+export const zodValidator = new DataValidator(
+  new ZodValidator(manufacturerSchemaValidation)
+);
