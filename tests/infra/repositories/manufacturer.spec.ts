@@ -1,8 +1,5 @@
-import {
-  CreateManufacturerInput,
-  Manufacturer,
-} from "../../../domain/manufacturer";
-import { IManufacturerRepository } from "../../../infra/repositories/manufacturer";
+import { CreateManufacturerInput, Manufacturer } from "../../../src/domain/manufacturer";
+import { IManufacturerRepository } from "../../../src/infra/repositories/manufacturer";
 
 export class ManufacturerRepositorySpy implements IManufacturerRepository {
   createParams: CreateManufacturerInput; 
