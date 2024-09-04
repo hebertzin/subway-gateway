@@ -1,18 +1,21 @@
 import { describe, expect, it, vi } from "vitest";
 import { AppError } from "../../../../src/application/errors/errors";
-import { AddManufacturerUseCase, IAddManufacturerUseCase } from "../../../../src/application/usecases/manufacturer";
+import {
+  AddManufacturerUseCase,
+  IAddManufacturerUseCase,
+} from "../../../../src/application/usecases/manufacturer";
 import { ILogger } from "../../../../src/domain/logger";
 import { CreateManufacturerInput } from "../../../../src/domain/manufacturer";
 import { ManufacturerRepositorySpy } from "../../../infra/repositories/manufacturer";
 
 const logger: ILogger = {
-      error: vi.fn(),
-      info: vi.fn(),
-      warn: vi.fn(),
-      debug: vi.fn(),
-      log: vi.fn()
-    };
-    
+  error: vi.fn(),
+  info: vi.fn(),
+  warn: vi.fn(),
+  debug: vi.fn(),
+  log: vi.fn(),
+};
+
 type SutTypes = {
   sut: IAddManufacturerUseCase;
   manufacturerRepositorySpy: ManufacturerRepositorySpy;
@@ -20,11 +23,7 @@ type SutTypes = {
 
 const makeSut = (): SutTypes => {
   const manufacturerRepositorySpy = new ManufacturerRepositorySpy();
-  const sut = new AddManufacturerUseCase(
-    manufacturerRepositorySpy,
-    logger
-  );
-
+  const sut = new AddManufacturerUseCase(manufacturerRepositorySpy, logger);
   return {
     sut,
     manufacturerRepositorySpy,
