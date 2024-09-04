@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { AppError } from "../../../../src/application/errors/errors";
-import { AddManufacturerUseCase } from "../../../../src/application/usecases/manufacturer";
+import { AddManufacturerUseCase, IAddManufacturerUseCase } from "../../../../src/application/usecases/manufacturer";
 import { ILogger } from "../../../../src/domain/logger";
 import { CreateManufacturerInput } from "../../../../src/domain/manufacturer";
 import { ManufacturerRepositorySpy } from "../../../infra/repositories/manufacturer";
@@ -14,7 +14,7 @@ const logger: ILogger = {
     };
     
 type SutTypes = {
-  sut: AddManufacturerUseCase;
+  sut: IAddManufacturerUseCase;
   manufacturerRepositorySpy: ManufacturerRepositorySpy;
 };
 
