@@ -8,7 +8,8 @@
     "db:migrate": "prisma migrate dev",
     "db:all": "npm run db:migrate & npm run db:seed",
     "db:down": "npx prisma migrate reset --force",
-    "test": "vitest"
+    "test": "vitest",
+    "dev": "nodemon src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
   "dependencies": {
     "@prisma/client": "^5.15.0",
     "express": "^4.19.2",
+    "supertest": "^7.0.0",
     "winston": "^3.14.2",
     "zod": "^3.23.8"
   },
