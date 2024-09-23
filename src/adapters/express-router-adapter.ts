@@ -3,17 +3,13 @@ import { Controller, HttpResponse } from "../domain/controller";
 
 export const adaptRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
-    const request = {
-      ...(req.body || {}),
-      ...(req.params || {}),
-    };
     try {
-      const httpResponse: HttpResponse = await controller.handle(request);
-      if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-        res.status(httpResponse.statusCode).json(httpResponse.body);
+      const response: HttpResponse = await controller.handle(req);
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        res.status(response.statusCode).json(response);
       } else {
-        res.status(httpResponse.statusCode).json({
-          error: httpResponse.msg,
+        res.status(response.statusCode).json({
+          error: response.msg,
         });
       }
     } catch (error) {
