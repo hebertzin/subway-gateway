@@ -1,13 +1,19 @@
-import { CreateManufacturerInput, Manufacturer } from "../../domain/manufacturer";
-import { prisma } from "../database/prisma";
+import { Manufacturer } from "../../domain/manufacturer";
+import {
+  prisma
+} from '../database/prisma-client';
 
 export interface IManufacturerRepository {
-  create(data: CreateManufacturerInput): Promise<Manufacturer>;
+  create(data: Manufacturer): Promise<Manufacturer>;
 }
 
 export class ManufacturerRepository implements IManufacturerRepository {
-  async create(data: CreateManufacturerInput): Promise<Manufacturer> {
-    const manufacturer = await prisma.manufacturer.create({ data });
-    return { manufacturer };
+  async create(data: Manufacturer): Promise<Manufacturer> {
+    const manufacturer = await prisma.manufacturer.create({ 
+      data: {
+        ...data
+      }
+    });
+    return manufacturer;
   }
 }

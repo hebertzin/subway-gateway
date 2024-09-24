@@ -1,8 +1,4 @@
 export type Manufacturer = {
-  manufacturer: CreateManufacturerInput;
-};
-
-export type CreateManufacturerInput = {
   name: string;
   phone: string;
   email: string;
