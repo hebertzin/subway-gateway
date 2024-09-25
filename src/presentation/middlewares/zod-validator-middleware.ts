@@ -30,7 +30,7 @@ export class DataValidator<T> {
       } catch (error) {
         if (error instanceof ZodError) {
           const errorMessages = error.errors.map((issue) => ({
-            message: `${issue.path.join(".")} is ${issue.message}`,
+            message: `${issue.message}`,
           }));
           res
             .status(HttpStatusCode.BadRequest)

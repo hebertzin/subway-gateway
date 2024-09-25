@@ -6,6 +6,6 @@ export const manufacturerRoutes = Router();
 
 manufacturerRoutes.post(
   "/",
-  manufacturerValidatorMiddleware.validate,
+  manufacturerValidatorMiddleware.validate(),
   adaptRoute(makeAddManufacturerController())
 );
