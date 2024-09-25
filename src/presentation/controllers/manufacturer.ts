@@ -6,7 +6,6 @@ import { Manufacturer } from "../../domain/manufacturer";
 
 export class AddManufacturerController implements Controller {
   constructor(readonly addManufacturerUseCase: IAddManufacturerUseCase) {}
-
   async handle(request: Request): Promise<HttpResponse> {
     try {
       const data = request.body as Manufacturer;
