@@ -6,8 +6,8 @@ export class ExpressApp {
 
   constructor() {
     this.expressApp = express();
-    this.middlewares();
     this.routes();
+    this.middlewares();
   }
 
   private middlewares(): void {
@@ -15,11 +15,12 @@ export class ExpressApp {
   }
 
   private routes() {
-    this.expressApp.use("/api/v1/manufacturer", manufacturerRoutes);
+    this.expressApp.use("/manufacturer", manufacturerRoutes);
   }
 
   public start(port: number | string) {
-    return this.expressApp.listen(port, () => {});
+    return this.expressApp.listen(port, () => {
+    });
   }
 
   public getApp(): Express {
