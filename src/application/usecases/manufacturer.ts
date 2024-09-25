@@ -10,13 +10,12 @@ export interface IAddManufacturerUseCase {
 
 export class AddManufacturerUseCase implements IAddManufacturerUseCase {
   constructor(
-    private readonly manufacturerRepository: IManufacturerRepository,
-    private readonly logger: ILogger
+    readonly manufacturerRepository: IManufacturerRepository,
+    readonly logger: ILogger
   ) {}
   async execute(data: Manufacturer): Promise<Manufacturer> {
     try {
       const manufacturer = await this.manufacturerRepository.create(data);
-      this.logger.info(`manufacturer ${data}, use case`);
       return manufacturer;
     } catch (error) {
       this.logger.error(`Error when trying to create manufacturer: ${error}`);
