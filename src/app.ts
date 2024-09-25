@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { type Express } from "express";
 import { manufacturerRoutes } from "./presentation/routes/manufacturer";
 
 export class ExpressApp {
@@ -6,8 +6,8 @@ export class ExpressApp {
 
   constructor() {
     this.expressApp = express();
-    this.routes();
     this.middlewares();
+    this.routes();
   }
 
   private middlewares(): void {
@@ -19,8 +19,7 @@ export class ExpressApp {
   }
 
   public start(port: number | string) {
-    return this.expressApp.listen(port, () => {
-    });
+    return this.expressApp.listen(port, () => {});
   }
 
   public getApp(): Express {
