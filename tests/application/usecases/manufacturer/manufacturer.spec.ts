@@ -5,7 +5,7 @@ import {
   IAddManufacturerUseCase,
 } from "../../../../src/application/usecases/manufacturer";
 import { ILogger } from "../../../../src/domain/logger";
-import { CreateManufacturerInput } from "../../../../src/domain/manufacturer";
+import { Manufacturer } from "../../../../src/domain/manufacturer";
 import { ManufacturerRepositorySpy } from "../../../infra/repositories/manufacturer";
 
 const logger: ILogger = {
@@ -33,8 +33,7 @@ const makeSut = (): SutTypes => {
 describe("AddManufacturerUseCase", () => {
   it("should create a manufacturer successfully", async () => {
     const { sut, manufacturerRepositorySpy } = makeSut();
-
-    const input: CreateManufacturerInput = {
+    const input: Manufacturer = {
       name: "Fabricante XYZ",
       city: "São Paulo",
       email: "contato@fabricantexyz.com",
@@ -45,9 +44,7 @@ describe("AddManufacturerUseCase", () => {
       website: "https://www.fabricantexyz.com",
       zip_code: "01310-000",
     };
-
     const result = await sut.execute(input);
-
     expect(result).toEqual(manufacturerRepositorySpy.result);
     expect(manufacturerRepositorySpy.createParams).toEqual(input);
   });
@@ -55,7 +52,7 @@ describe("AddManufacturerUseCase", () => {
   it("should throw an error if creating manufacturer fails", async () => {
     const { sut, manufacturerRepositorySpy } = makeSut();
 
-    const input: CreateManufacturerInput = {
+    const input: Manufacturer = {
       name: "Fabricante XYZ",
       city: "São Paulo",
       email: "contato@fabricantexyz.com",
@@ -66,12 +63,10 @@ describe("AddManufacturerUseCase", () => {
       website: "https://www.fabricantexyz.com",
       zip_code: "01310-000",
     };
-
     const errorMessage = "Simulated create error";
     manufacturerRepositorySpy.create = vi
       .fn()
       .mockRejectedValueOnce(new Error(errorMessage));
-
     await expect(sut.execute(input)).rejects.toThrow(AppError);
     expect(logger.error).toHaveBeenCalledWith(
       `Error when trying to create manufacturer: Error: ${errorMessage}`
