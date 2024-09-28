@@ -46,4 +46,3 @@ export class LoggerService implements ILogger {
     this.logger.log({ level, message });
   }
 }
-

@@ -54,7 +54,6 @@ describe("POST /manufacturer", () => {
       zip_code: "12345",
       website: "https://www.techcorp.com",
     };
-
     const response = await supertest(new app().getApp())
       .post("/manufacturer")
       .send(incompleteData)
@@ -88,7 +87,6 @@ describe("POST /manufacturer", () => {
       zip_code: "12345",
       website: "https://www.techcorp.com",
     };
-
     const response = await supertest(new app().getApp())
       .post("/manufacturer")
       .send(incompleteData)
@@ -119,7 +117,6 @@ describe("POST /manufacturer", () => {
       zip_code: "000000000",
       website: "https://www.techcorp.com",
     };
-
     const response = await supertest(new app().getApp())
       .post("/manufacturer")
       .send(incompleteData)
@@ -169,7 +166,6 @@ describe("POST /manufacturer", () => {
       ])
     );
   });
-
   it("Should return an error if website address is invalid", async () => {
     const incompleteData = {
       name: "TechCorp",

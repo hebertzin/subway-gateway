@@ -6,7 +6,6 @@ import {
 } from "../../../../src/application/usecases/manufacturer";
 import { ILogger } from "../../../../src/domain/logger";
 import { Manufacturer } from "../../../../src/domain/manufacturer";
-import { ManufacturerRepositorySpy } from "../../../infra/repositories/manufacturer";
 
 const logger: ILogger = {
   error: vi.fn(),
@@ -16,23 +15,18 @@ const logger: ILogger = {
   log: vi.fn(),
 };
 
-type SutTypes = {
-  sut: IAddManufacturerUseCase;
-  manufacturerRepositorySpy: ManufacturerRepositorySpy;
+const manufacturerRepositoryMock = {
+  create: vi.fn(),
 };
 
-const makeSut = (): SutTypes => {
-  const manufacturerRepositorySpy = new ManufacturerRepositorySpy();
-  const sut = new AddManufacturerUseCase(manufacturerRepositorySpy, logger);
-  return {
-    sut,
-    manufacturerRepositorySpy,
-  };
+const makeSut = (): { sut: IAddManufacturerUseCase } => {
+  const sut = new AddManufacturerUseCase(manufacturerRepositoryMock, logger);
+  return { sut };
 };
 
 describe("AddManufacturerUseCase", () => {
   it("should create a manufacturer successfully", async () => {
-    const { sut, manufacturerRepositorySpy } = makeSut();
+    const { sut } = makeSut();
     const input: Manufacturer = {
       name: "Fabricante XYZ",
       city: "São Paulo",
@@ -44,14 +38,17 @@ describe("AddManufacturerUseCase", () => {
       website: "https://www.fabricantexyz.com",
       zip_code: "01310-000",
     };
+    const resultManufacturer: Manufacturer = {
+      ...input,
+    };
+    manufacturerRepositoryMock.create.mockResolvedValueOnce(resultManufacturer);
     const result = await sut.execute(input);
-    expect(result).toEqual(manufacturerRepositorySpy.result);
-    expect(manufacturerRepositorySpy.createParams).toEqual(input);
+    expect(result).toEqual(resultManufacturer);
+    expect(manufacturerRepositoryMock.create).toHaveBeenCalledWith(input);
   });
 
   it("should throw an error if creating manufacturer fails", async () => {
-    const { sut, manufacturerRepositorySpy } = makeSut();
-
+    const { sut } = makeSut();
     const input: Manufacturer = {
       name: "Fabricante XYZ",
       city: "São Paulo",
@@ -64,9 +61,7 @@ describe("AddManufacturerUseCase", () => {
       zip_code: "01310-000",
     };
     const errorMessage = "Simulated create error";
-    manufacturerRepositorySpy.create = vi
-      .fn()
-      .mockRejectedValueOnce(new Error(errorMessage));
+    manufacturerRepositoryMock.create.mockRejectedValueOnce(new Error(errorMessage));
     await expect(sut.execute(input)).rejects.toThrow(AppError);
     expect(logger.error).toHaveBeenCalledWith(
       `Error when trying to create manufacturer: Error: ${errorMessage}`
