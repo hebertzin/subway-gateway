@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import { init } from "./infra/database/prisma-client";
 import { manufacturerRoutes } from "./presentation/routes/manufacturer";
 
 export class ExpressApp {
@@ -19,6 +20,9 @@ export class ExpressApp {
   }
 
   public start(port: number | string) {
+     init().catch((err) => {
+      return err;
+    });
     return this.expressApp.listen(port, () => {});
   }
 
