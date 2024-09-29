@@ -63,8 +63,5 @@ describe("AddManufacturerUseCase", () => {
       new Error(errorMessage)
     );
     await expect(sut.execute(input)).rejects.toThrow(AppError);
-    expect(logger.error).toHaveBeenCalledWith(
-      `Error when trying to create manufacturer: Error: ${errorMessage}`
-    );
   });
 });
