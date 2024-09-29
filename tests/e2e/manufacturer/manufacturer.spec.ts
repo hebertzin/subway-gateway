@@ -17,7 +17,7 @@ describe("POST /manufacturer", () => {
       website: "https://www.hebertzin.com/",
     };
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(manufacturerData)
       .expect(HttpStatusCode.Created);
 
@@ -55,7 +55,7 @@ describe("POST /manufacturer", () => {
       website: "https://www.techcorp.com",
     };
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
@@ -88,7 +88,7 @@ describe("POST /manufacturer", () => {
       website: "https://www.techcorp.com",
     };
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
@@ -118,7 +118,7 @@ describe("POST /manufacturer", () => {
       website: "https://www.techcorp.com",
     };
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
@@ -149,7 +149,7 @@ describe("POST /manufacturer", () => {
     };
 
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
@@ -180,7 +180,7 @@ describe("POST /manufacturer", () => {
     };
 
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
@@ -210,7 +210,7 @@ describe("POST /manufacturer", () => {
     };
 
     const response = await supertest(new app().getApp())
-      .post("/manufacturer")
+      .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 

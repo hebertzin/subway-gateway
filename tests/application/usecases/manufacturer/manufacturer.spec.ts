@@ -1,13 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import { AppError } from "../../../../src/application/errors/errors";
-import {
-  AddManufacturerUseCase,
-  IAddManufacturerUseCase,
-} from "../../../../src/application/usecases/manufacturer";
+import { AddManufacturerUseCase } from "../../../../src/application/usecases/manufacturer";
 import { Manufacturer } from "../../../../src/domain/entities/manufacturer";
-import { ILogger } from "../../../../src/domain/logger";
+import { Logging } from "../../../../src/domain/logger";
+import { AddManufacturer } from "../../../../src/domain/usecases/add-manufacturer-use-case";
 
-const logger: ILogger = {
+const logger: Logging = {
   error: vi.fn(),
   info: vi.fn(),
   warn: vi.fn(),
@@ -19,7 +17,7 @@ const manufacturerRepositoryMock = {
   create: vi.fn(),
 };
 
-const makeSut = (): { sut: IAddManufacturerUseCase } => {
+const makeSut = (): { sut: AddManufacturer } => {
   const sut = new AddManufacturerUseCase(manufacturerRepositoryMock, logger);
   return { sut };
 };
@@ -61,7 +59,9 @@ describe("AddManufacturerUseCase", () => {
       zip_code: "01310-000",
     };
     const errorMessage = "Simulated create error";
-    manufacturerRepositoryMock.create.mockRejectedValueOnce(new Error(errorMessage));
+    manufacturerRepositoryMock.create.mockRejectedValueOnce(
+      new Error(errorMessage)
+    );
     await expect(sut.execute(input)).rejects.toThrow(AppError);
     expect(logger.error).toHaveBeenCalledWith(
       `Error when trying to create manufacturer: Error: ${errorMessage}`
