@@ -1,5 +1,5 @@
 import { User } from "../../entities/users";
 
-export interface AddUser {
+export interface AddUserRepository {
   create(user: User): Promise<User>;
 }
