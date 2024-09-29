@@ -12,7 +12,14 @@ export const init = async () => {
       },
     },
   });
-  await prisma.$connect();
+  await prisma
+    .$connect()
+    .then(() => {
+      console.info("Prisma conected");
+    })
+    .catch((err) => {
+      console.error(`Some error has been ocurred ${err}`);
+    });
   return { envVars, prisma };
 };
 

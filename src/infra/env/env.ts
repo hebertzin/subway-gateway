@@ -8,15 +8,12 @@ export const loadEnv = async () => {
   const envSchema = z.object({
     NODE_ENV: z.enum(["prod", "test"]).default("test"),
     DATABASE_URL: z.string().optional(),
-    DATABASE_URL_TEST: z.string().optional(),
   });
-
   const env = envSchema.safeParse(process.env);
   if (!env.success) {
     console.error("Invalid environment variables:", env.error.format());
     process.exit(1);
   }
-
   const databaseUrl =
     env.data.NODE_ENV === "test"
       ? env.data.DATABASE_URL
