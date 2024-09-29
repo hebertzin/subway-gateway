@@ -4,8 +4,8 @@ import {
   AddManufacturerUseCase,
   IAddManufacturerUseCase,
 } from "../../../../src/application/usecases/manufacturer";
+import { Manufacturer } from "../../../../src/domain/entities/manufacturer";
 import { ILogger } from "../../../../src/domain/logger";
-import { Manufacturer } from "../../../../src/domain/manufacturer";
 
 const logger: ILogger = {
   error: vi.fn(),

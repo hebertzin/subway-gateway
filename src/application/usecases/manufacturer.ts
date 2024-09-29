@@ -1,6 +1,6 @@
+import { Manufacturer } from "../../domain/entities/manufacturer";
 import { HttpStatusCode } from "../../domain/http";
 import { Logging } from "../../domain/logger";
-import { Manufacturer } from "../../domain/manufacturer";
 import { AddManufacturerRepository } from "../../domain/repositories/manufacturer-repository";
 import { AddManufacturer } from "../../domain/usecases/add-manufacturer-use-case";
 import { AppError } from "../errors/errors";

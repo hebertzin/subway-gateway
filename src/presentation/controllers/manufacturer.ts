@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { Controller, HttpResponse } from "../../domain/controller";
+import { Manufacturer } from "../../domain/entities/manufacturer";
 import { HttpStatusCode } from "../../domain/http";
-import { Manufacturer } from "../../domain/manufacturer";
 import { AddManufacturer } from "../../domain/usecases/add-manufacturer-use-case";
 
 export class AddManufacturerController implements Controller {

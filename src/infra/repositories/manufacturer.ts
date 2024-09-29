@@ -1,4 +1,4 @@
-import type { Manufacturer } from "../../domain/manufacturer";
+import type { Manufacturer } from "../../domain/entities/manufacturer";
 import { AddManufacturerRepository } from "../../domain/repositories/manufacturer-repository";
 import { prisma } from "../database/prisma-client";
 
