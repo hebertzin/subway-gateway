@@ -1,10 +1,13 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true
-  },
-  "include": ["src/**/*", "prisma"]
+	"compilerOptions": {
+		"target": "es2016",
+		"module": "commonjs",
+		"rootDir": "./",
+		"outDir": "./dist",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true
+	},
+	"include": ["src", "tests"],
+	"exclude": ["node_modules"]
 }

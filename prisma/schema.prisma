@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
 }
 
 datasource db {
@@ -14,13 +8,11 @@ datasource db {
 }
 
 model Roles {
-
   id          String   @unique @default(uuid())
   name        String
   description String
-  createAt    DateTime @default(now())
+  createdAt    DateTime @default(now())
   Users       Users[]
-  updateAt    DateTime @updatedAt
 }
 
 model Users {
@@ -41,6 +33,20 @@ model Users {
   date_of_birth String
   languages     String
   createdAt     DateTime @default(now())
-  updateAt      DateTime @updatedAt
+  updatedAt      DateTime @updatedAt
 }
 
+model Manufacturer {
+  id        String   @unique @default(uuid())
+  name      String
+  phone     String
+  email     String
+  street    String
+  number    String
+  city      String
+  state     String
+  zip_code  String
+  website   String
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
