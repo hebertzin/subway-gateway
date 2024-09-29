@@ -11,7 +11,7 @@ model Roles {
   id          String   @unique @default(uuid())
   name        String
   description String
-  createAt    DateTime @default(now())
+  createdAt    DateTime @default(now())
   Users       Users[]
 }
 
@@ -33,7 +33,7 @@ model Users {
   date_of_birth String
   languages     String
   createdAt     DateTime @default(now())
-  updateAt      DateTime @updatedAt
+  updatedAt      DateTime @updatedAt
 }
 
 model Manufacturer {
@@ -48,5 +48,5 @@ model Manufacturer {
   zip_code  String
   website   String
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
