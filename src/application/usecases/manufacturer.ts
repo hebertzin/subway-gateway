@@ -1,14 +1,11 @@
 import { HttpStatusCode } from "../../domain/http";
 import { ILogger } from "../../domain/logger";
 import { Manufacturer } from "../../domain/manufacturer";
+import { AddManufacturer } from "../../domain/usecases/add-manufacturer-use-case";
 import { IManufacturerRepository } from "../../infra/repositories/manufacturer";
 import { AppError } from "../errors/errors";
 
-export interface IAddManufacturerUseCase {
-  execute(data: Manufacturer): Promise<Manufacturer>;
-}
-
-export class AddManufacturerUseCase implements IAddManufacturerUseCase {
+export class AddManufacturerUseCase implements AddManufacturer {
   constructor(
     readonly manufacturerRepository: IManufacturerRepository,
     readonly logger: ILogger

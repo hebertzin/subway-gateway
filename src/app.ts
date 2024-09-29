@@ -15,7 +15,7 @@ export class ExpressApp {
   }
 
   private routes() {
-    this.expressApp.use("/manufacturer", manufacturerRoutes);
+    this.expressApp.use("/api/v1/manufacturer", manufacturerRoutes);
   }
 
   public start(port: number | string) {
