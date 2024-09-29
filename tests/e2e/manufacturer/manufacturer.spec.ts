@@ -20,26 +20,23 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(manufacturerData)
       .expect(HttpStatusCode.Created);
-
-    expect(response.body).toHaveProperty("data");
-    expect(response.body.data).toHaveProperty("msg");
-    expect(response.body.data.msg).toBe("Manufacturer created successfully");
-    expect(response.body.data).toHaveProperty("statusCode");
-    expect(response.body.data.statusCode).toBe(HttpStatusCode.Created);
-    expect(response.body.data).toHaveProperty("body");
-    expect(response.body.data.body).toEqual(
-      expect.objectContaining({
-        name: manufacturerData.name,
-        phone: manufacturerData.phone,
-        email: manufacturerData.email,
-        street: manufacturerData.street,
-        number: manufacturerData.number,
-        city: manufacturerData.city,
-        state: manufacturerData.state,
-        zip_code: manufacturerData.zip_code,
-        website: manufacturerData.website,
-      })
-    );
+    expect(response.body).toMatchObject({
+      data: {
+        msg: "Manufacturer created successfully",
+        statusCode: HttpStatusCode.Created,
+        body: expect.objectContaining({
+          name: manufacturerData.name,
+          phone: manufacturerData.phone,
+          email: manufacturerData.email,
+          street: manufacturerData.street,
+          number: manufacturerData.number,
+          city: manufacturerData.city,
+          state: manufacturerData.state,
+          zip_code: manufacturerData.zip_code,
+          website: manufacturerData.website,
+        }),
+      },
+    });
   });
 
   it("Should return an error if email is missing", async () => {
@@ -58,21 +55,14 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
+        expect.objectContaining({ message: "Invalid email address" }),
+        expect.objectContaining({ message: "Email is required" }),
+      ]),
+    });
     expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          message: "Invalid email address",
-        }),
-        expect.objectContaining({
-          message: "Email is required",
-        }),
-      ])
-    );
   });
 
   it("Should return an error if email is invalid", async () => {
@@ -91,18 +81,12 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
-    expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          message: "Invalid email address",
-        }),
-      ])
-    );
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
+        expect.objectContaining({ message: "Invalid email address" }),
+      ]),
+    });
   });
 
   it("Should return an error if zip code is invalid", async () => {
@@ -121,18 +105,15 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
-    expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
         expect.objectContaining({
           message: "Zip code must be in the format XXXXX-XXX",
         }),
-      ])
-    );
+      ]),
+    });
+    expect(Array.isArray(response.body.details)).toBe(true);
   });
 
   it("Should return an error if phone number is invalid", async () => {
@@ -152,20 +133,18 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
-    expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
         expect.objectContaining({
           message:
             "Phone number must be in the format (XX) XXXXX-XXXX or (XX) XXXX-XXXX",
         }),
-      ])
-    );
+      ]),
+    });
+    expect(Array.isArray(response.body.details)).toBe(true);
   });
+
   it("Should return an error if website address is invalid", async () => {
     const incompleteData = {
       name: "TechCorp",
@@ -184,18 +163,17 @@ describe("POST /manufacturer", () => {
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
 
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
-    expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
         expect.objectContaining({
           message: "Must be a valid URL",
         }),
-      ])
-    );
+      ]),
+    });
+    expect(Array.isArray(response.body.details)).toBe(true);
   });
+
   it("Should return any errors in any field passed", async () => {
     const incompleteData = {
       name: "",
@@ -213,54 +191,27 @@ describe("POST /manufacturer", () => {
       .post("/api/v1/manufacturer")
       .send(incompleteData)
       .expect(HttpStatusCode.BadRequest);
-
-    expect(response.body).toHaveProperty("error");
-    expect(response.body.error).toBe("Invalid data");
-    expect(response.body).toHaveProperty("details");
-    expect(Array.isArray(response.body.details)).toBe(true);
-    expect(response.body.details).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          message: "Name is required",
-        }),
-        expect.objectContaining({
-          message: "Phone number must be at least 10 digits",
-        }),
-        expect.objectContaining({
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
+        { message: "Name is required" },
+        { message: "Phone number must be at least 10 digits" },
+        {
           message:
             "Phone number must be in the format (XX) XXXXX-XXXX or (XX) XXXX-XXXX",
-        }),
-        expect.objectContaining({
-          message: "Invalid email address",
-        }),
-        expect.objectContaining({
-          message: "Email is required",
-        }),
-        expect.objectContaining({
-          message: "Street is required",
-        }),
-        expect.objectContaining({
-          message: "Number is required",
-        }),
-        expect.objectContaining({
-          message: "City is required",
-        }),
-        expect.objectContaining({
-          message: "State must be a 2-letter code",
-        }),
-        expect.objectContaining({
-          message: "Zip code must be at least 8 characters",
-        }),
-        expect.objectContaining({
-          message: "Zip code must be in the format XXXXX-XXX",
-        }),
-        expect.objectContaining({
-          message: "Must be a valid URL",
-        }),
-        expect.objectContaining({
-          message: "URL is required",
-        }),
-      ])
-    );
+        },
+        { message: "Invalid email address" },
+        { message: "Email is required" },
+        { message: "Street is required" },
+        { message: "Number is required" },
+        { message: "City is required" },
+        { message: "State must be a 2-letter code" },
+        { message: "Zip code must be at least 8 characters" },
+        { message: "Zip code must be in the format XXXXX-XXX" },
+        { message: "Must be a valid URL" },
+        { message: "URL is required" },
+      ]),
+    });
+    expect(Array.isArray(response.body.details)).toBe(true);
   });
 });
