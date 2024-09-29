@@ -10,8 +10,9 @@
     "db:down": "npx prisma migrate reset --force",
     "test": "vitest",
     "test:e2e": "vitest ./tests/e2e/*",
-    "dev": "NODE_ENV=test dotenv -e .env.test nodemon src/server.ts",
-    "dev:migrations": "NODE_ENV=test dotenv -e .env.test -- prisma migrate dev"
+    "dev": "NODE_ENV=test dotenv -e .env.test -- nodemon src/server.ts",
+    "db:seed:test": "NODE_ENV=test dotenv -e .env.test -- ts-node prisma/seed.ts",
+    "db:migrate:test": "NODE_ENV=test dotenv -e .env.test -- npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
