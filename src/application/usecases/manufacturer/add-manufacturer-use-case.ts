@@ -2,7 +2,7 @@ import { Manufacturer } from "../../../domain/entities/manufacturer";
 import { HttpStatusCode } from "../../../domain/http";
 import { Logging } from "../../../domain/logger";
 import { AddManufacturerRepository } from "../../../domain/repository/manufacturer/add-manufacturer-repository";
-import { AddManufacturer } from "../../../domain/usecases/add-manufacturer-use-case";
+import { AddManufacturer } from "../../../domain/usecases/manufacturer/add-manufacturer-use-case";
 import { AppError } from "../../errors/errors";
 
 export class AddManufacturerUseCase implements AddManufacturer {
