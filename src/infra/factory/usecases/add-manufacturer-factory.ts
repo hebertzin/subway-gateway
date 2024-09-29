@@ -1,4 +1,4 @@
-import { AddManufacturerUseCase } from "../../../application/usecases/manufacturer";
+import { AddManufacturerUseCase } from "../../../application/usecases/manufacturer/add-manufacturer-use-case";
 import { AddManufacturer } from "../../../domain/usecases/add-manufacturer-use-case";
 import { LoggerService } from "../../logging/logger";
 import { ManufacturerRepository } from "../../repositories/manufacturer";
