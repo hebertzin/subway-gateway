@@ -1,4 +1,4 @@
-export interface ILogger {
+export interface Logging {
   info(message: string): void;
   error(message: string): void;
   warn(message: string): void;
