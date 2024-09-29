@@ -41,8 +41,8 @@ describe("AddManufacturerUseCase", () => {
     };
     manufacturerRepositoryMock.create.mockResolvedValueOnce(resultManufacturer);
     const result = await sut.execute(input);
-    expect(result).toEqual(resultManufacturer);
     expect(manufacturerRepositoryMock.create).toHaveBeenCalledWith(input);
+    expect(result).toEqual(resultManufacturer);
   });
 
   it("should throw an error if creating manufacturer fails", async () => {
@@ -58,9 +58,8 @@ describe("AddManufacturerUseCase", () => {
       website: "https://www.fabricantexyz.com",
       zip_code: "01310-000",
     };
-    const errorMessage = "Simulated create error";
     manufacturerRepositoryMock.create.mockRejectedValueOnce(
-      new Error(errorMessage)
+      new Error("Simulated create error")
     );
     await expect(sut.execute(input)).rejects.toThrow(AppError);
   });

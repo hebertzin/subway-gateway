@@ -62,7 +62,6 @@ describe("POST /manufacturer", () => {
         expect.objectContaining({ message: "Email is required" }),
       ]),
     });
-    expect(Array.isArray(response.body.details)).toBe(true);
   });
 
   it("Should return an error if email is invalid", async () => {
@@ -113,7 +112,6 @@ describe("POST /manufacturer", () => {
         }),
       ]),
     });
-    expect(Array.isArray(response.body.details)).toBe(true);
   });
 
   it("Should return an error if phone number is invalid", async () => {
@@ -142,7 +140,6 @@ describe("POST /manufacturer", () => {
         }),
       ]),
     });
-    expect(Array.isArray(response.body.details)).toBe(true);
   });
 
   it("Should return an error if website address is invalid", async () => {
@@ -171,7 +168,6 @@ describe("POST /manufacturer", () => {
         }),
       ]),
     });
-    expect(Array.isArray(response.body.details)).toBe(true);
   });
 
   it("Should return any errors in any field passed", async () => {
@@ -212,6 +208,5 @@ describe("POST /manufacturer", () => {
         { message: "URL is required" },
       ]),
     });
-    expect(Array.isArray(response.body.details)).toBe(true);
   });
 });
