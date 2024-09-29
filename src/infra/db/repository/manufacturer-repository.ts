@@ -1,6 +1,6 @@
-import type { Manufacturer } from "../../domain/entities/manufacturer";
-import { AddManufacturerRepository } from "../../domain/repositories/manufacturer/add-manufacturer-repository";
-import { prisma } from "../database/prisma-client";
+import type { Manufacturer } from "../../../domain/entities/manufacturer";
+import { AddManufacturerRepository } from "../../../domain/repositories/manufacturer/add-manufacturer-repository";
+import { prisma } from "../prisma-client";
 
 export class ManufacturerRepository implements AddManufacturerRepository {
   async create(data: Manufacturer): Promise<Manufacturer> {

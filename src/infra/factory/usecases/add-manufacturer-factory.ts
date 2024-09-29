@@ -1,7 +1,7 @@
 import { AddManufacturerUseCase } from "../../../application/usecases/manufacturer/add-manufacturer-use-case";
 import { AddManufacturer } from "../../../domain/usecases/add-manufacturer-use-case";
+import { ManufacturerRepository } from "../../db/repository/manufacturer-repository";
 import { LoggerService } from "../../logging/logger";
-import { ManufacturerRepository } from "../../repositories/manufacturer";
 
 export const makeDbAddManufacturer = (): AddManufacturer => {
   const manufacturerRepository = new ManufacturerRepository();

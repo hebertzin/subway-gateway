@@ -1,5 +1,5 @@
 import { ExpressApp } from "./app";
-import { init } from "./infra/database/prisma-client";
+import { init } from "./infra/db/prisma-client";
 
 init().catch((err) => {
   return err;
