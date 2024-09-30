@@ -11,14 +11,18 @@ export class AddUserUseCase implements AddUser {
   constructor(
     readonly addUserRepository: AddUserRepository,
     readonly logging: Logging,
-    readonly loadUserByEmail: LoadUserByEmailRepository,
+    readonly loadUserByEmailRepository: LoadUserByEmailRepository,
     readonly hasher: Hasher
   ) {}
   async execute(userData: User): Promise<User> {
     try {
-      if (this.loadUserByEmail.loadByEmail(userData.email)) {
+      const existentUser = await this.loadUserByEmailRepository.loadByEmail(
+        userData.email
+      );
+      if (existentUser) {
+        this.logging.warn("Could not create user because it already exists");
         throw new UserAlreadyExistError(
-          "User already exist",
+          "User already exists",
           HttpStatusCode.Conflict
         );
       }
