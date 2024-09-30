@@ -1,5 +1,5 @@
 import { User } from "../../entities/users";
 
 export type LoadUserByEmailRepository = {
-  loadByEmail(email: string): Promise<User>;
+  loadByEmail(email: string): Promise<Omit<User, "password">>;
 };

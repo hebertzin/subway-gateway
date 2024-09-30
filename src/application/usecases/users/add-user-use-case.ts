@@ -3,7 +3,7 @@ import { Hasher } from "../../../domain/hasher";
 import { HttpStatusCode } from "../../../domain/http";
 import { Logging } from "../../../domain/logger";
 import { AddUserRepository } from "../../../domain/repository/users/add-user-repository";
-import { LoadUserByEmailRepository } from "../../../domain/repository/users/find-user-by-email";
+import { LoadUserByEmailRepository } from "../../../domain/repository/users/load-user-by-email";
 import { AddUser } from "../../../domain/usecases/users/add-user-use-case";
 import { AppError, UserAlreadyExistError } from "../../errors/errors";
 
