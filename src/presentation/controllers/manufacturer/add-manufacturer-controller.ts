@@ -1,8 +1,8 @@
 import { Request } from "express";
-import { Controller, HttpResponse } from "../../domain/controller";
-import { Manufacturer } from "../../domain/entities/manufacturer";
-import { HttpStatusCode } from "../../domain/http";
-import { AddManufacturer } from "../../domain/usecases/manufacturer/add-manufacturer-use-case";
+import { Controller, HttpResponse } from "../../../domain/controller";
+import { Manufacturer } from "../../../domain/entities/manufacturer";
+import { HttpStatusCode } from "../../../domain/http";
+import { AddManufacturer } from "../../../domain/usecases/manufacturer/add-manufacturer-use-case";
 
 export class AddManufacturerController implements Controller {
   constructor(readonly addManufacturerUseCase: AddManufacturer) {}
