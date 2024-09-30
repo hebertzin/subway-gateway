@@ -1,5 +1,5 @@
 import express, { type Express } from "express";
-import { manufacturerRoutes } from "./presentation/routes/manufacturer";
+import { appRoutes } from "./presentation/routes";
 
 export class ExpressApp {
   private expressApp: Express;
@@ -15,7 +15,7 @@ export class ExpressApp {
   }
 
   private routes() {
-    this.expressApp.use("/api/v1/manufacturer", manufacturerRoutes);
+    this.expressApp.use("/api/v1", appRoutes);
   }
 
   public start(port: number | string) {

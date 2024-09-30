@@ -1,4 +1,4 @@
-import { manufacturerSchemaValidation } from "../validations/manufacturer";
+import { manufacturerSchemaValidation } from "../validators/manufacturer";
 import { DataValidator, ZodValidator } from "./zod-validator-middleware";
 
 export const manufacturerValidatorMiddleware = new DataValidator(
