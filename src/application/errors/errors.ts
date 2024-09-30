@@ -7,11 +7,11 @@ export class AppError extends Error {
   }
 }
 
-export class ResourseAlreadyExistError extends Error {
+export class UserAlreadyExistError extends Error {
   statusCode: number;
   constructor(message: string, statusCode: number) {
     super(message);
     this.statusCode = statusCode;
-    this.name = "ResourseAlreadyExistError";
+    this.name = "UserAlreadyExist";
   }
 }
