@@ -28,6 +28,9 @@ export class AddUserUseCase implements AddUser {
       this.logging.info("User created successfully");
       return user;
     } catch (error) {
+      this.logging.error(
+        `Some error has been ocurred trying create a new user ${error}`
+      );
       throw new AppError(
         "Some error has been ocurred",
         HttpStatusCode.InternalServerError
