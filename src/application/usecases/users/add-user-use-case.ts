@@ -9,7 +9,7 @@ import { AppError, UserAlreadyExistError } from "../../errors/errors";
 
 export class AddUserUseCase implements AddUser {
   constructor(
-    readonly userRepository: AddUserRepository,
+    readonly addUserRepository: AddUserRepository,
     readonly logging: Logging,
     readonly loadUserByEmail: LoadUserByEmailRepository,
     readonly hasher: Hasher
@@ -24,7 +24,7 @@ export class AddUserUseCase implements AddUser {
       }
       const passwordHashed = await this.hasher.hash(userData.password);
       const updatedUserData = { ...userData, password: passwordHashed };
-      const user = await this.userRepository.create(updatedUserData);
+      const user = await this.addUserRepository.create(updatedUserData);
       this.logging.info("User created successfully");
       return user;
     } catch (error) {
