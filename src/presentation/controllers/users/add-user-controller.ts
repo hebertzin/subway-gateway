@@ -6,9 +6,9 @@ import { AddUser } from "../../../domains/usecases/users/add-user-use-case";
 
 export class AddUserController implements Controller {
   constructor(readonly addUserUseCase: AddUser) {}
-  async handle(req: Request): Promise<HttpResponse> {
+  async handle(request: Request): Promise<HttpResponse> {
     try {
-      const data = req.body as User;
+      const data = request.body as User;
       const user = await this.addUserUseCase.execute(data);
       return {
         msg: "User created successfully",
