@@ -34,8 +34,16 @@ export class UsersRepository implements UserRepository {
   }
 
   async get(filters: Partial<User>): Promise<Omit<User, "password">[]> {
-    const { email, phone, city, state, country, username, date_of_birth } =
-      filters;
+    const {
+      email,
+      phone,
+      city,
+      state,
+      country,
+      username,
+      date_of_birth,
+      languages,
+    } = filters;
     const users = await prisma.users.findMany({
       where: {
         AND: [
@@ -48,6 +56,9 @@ export class UsersRepository implements UserRepository {
             ? { username: { contains: username, mode: "insensitive" } }
             : {},
           date_of_birth ? { date_of_birth } : {},
+          languages
+            ? { languages: { contains: languages, mode: "insensitive" } }
+            : {},
         ],
       },
       select: {
