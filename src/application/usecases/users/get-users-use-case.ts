@@ -2,11 +2,8 @@ import { User } from "../../../domains/entities/users";
 import { HttpStatusCode } from "../../../domains/http";
 import { Logging } from "../../../domains/logger";
 import { UserRepository } from "../../../domains/repository/users/user-repository";
+import { GetUsers } from "../../../domains/usecases/users/get-users-use-case";
 import { AppError } from "../../errors/errors";
-
-export interface GetUsers {
-  execute(filters: Partial<User>): Promise<Omit<User, "password">[]>;
-}
 
 export class GetUsersUseCase implements GetUsers {
   constructor(

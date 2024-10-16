@@ -1,7 +1,7 @@
 import { Request } from "express";
-import { GetUserById } from "../../../application/usecases/users/get-user-by-id";
 import { Controller, HttpResponse } from "../../../domains/controller";
 import { HttpStatusCode } from "../../../domains/http";
+import { GetUserById } from "../../../domains/usecases/users/get-user-by-id";
 
 export class GetUserByIdController implements Controller {
   constructor(readonly getUserById: GetUserById) {}

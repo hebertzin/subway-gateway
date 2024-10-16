@@ -1,7 +1,5 @@
-import {
-      GetUsers,
-      GetUsersUseCase,
-} from "../../../../application/usecases/users/get-users-use-case";
+import { GetUsersUseCase } from "../../../../application/usecases/users/get-users-use-case";
+import { GetUsers } from "../../../../domains/usecases/users/get-users-use-case";
 import { UsersRepository } from "../../../db/repository/user-repository";
 import { LoggerService } from "../../../logging/logger";
 
