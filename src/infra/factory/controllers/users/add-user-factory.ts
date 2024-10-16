@@ -3,6 +3,6 @@ import { AddUserController } from "../../../../presentation/controllers/users/ad
 import { makeDbAddUser } from "../../usecases/users/add-user-factory";
 
 export const makeAddUserController = () : Controller => {
-  const dbAddUser = makeDbAddUser();
-  return new AddUserController(dbAddUser)
+  const addUserUseCase = makeDbAddUser();
+  return new AddUserController(addUserUseCase)
 }

@@ -5,6 +5,6 @@ import { LoggerService } from "../../../logging/logger";
 
 export const makeDbAddManufacturer = (): AddManufacturer => {
   const manufacturerRepository = new ManufacturerRepository();
-  const loggerService = new LoggerService();
-  return new AddManufacturerUseCase(manufacturerRepository, loggerService);
+  const logging = new LoggerService();
+  return new AddManufacturerUseCase(manufacturerRepository, logging);
 };
