@@ -11,7 +11,7 @@ export class UsersRepository implements UserRepository {
     });
     return user;
   }
-  
+
   async update(user_id: string, userData: Partial<User>): Promise<User> {
     const user = await prisma.users.update({
       where: { id: user_id },
@@ -76,15 +76,18 @@ export class UsersRepository implements UserRepository {
       username,
       date_of_birth,
       languages,
+      gender,
     } = filters;
     const users = await prisma.users.findMany({
       where: {
         AND: [
           email ? { email } : {},
           phone ? { phone } : {},
-          city ? { city } : {},
-          state ? { state } : {},
-          country ? { country } : {},
+          city ? { city: { contains: city, mode: "insensitive" } } : {},
+          state ? { state: { contains: state, mode: "insensitive" } } : {},
+          country
+            ? { country: { contains: country, mode: "insensitive" } }
+            : {},
           username
             ? { username: { contains: username, mode: "insensitive" } }
             : {},
@@ -92,6 +95,7 @@ export class UsersRepository implements UserRepository {
           languages
             ? { languages: { contains: languages, mode: "insensitive" } }
             : {},
+          gender ? { gender: { contains: gender, mode: "insensitive" } } : {},
         ],
       },
       select: {
