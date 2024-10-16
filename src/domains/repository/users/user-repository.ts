@@ -5,4 +5,5 @@ export interface UserRepository {
   loadByEmail(email: string): Promise<Omit<User, "password">>;
   get(filters: Partial<User>): Promise<Omit<User, "password">[]>;
   loadById(user_id: string): Promise<Omit<User, "password">>;
+  update(user_id: string, userData: Partial<User>): Promise<User>
 }
