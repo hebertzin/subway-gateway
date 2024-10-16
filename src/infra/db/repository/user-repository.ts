@@ -32,4 +32,40 @@ export class UsersRepository implements UserRepository {
     });
     return user;
   }
+
+  async get(filters: Partial<User>): Promise<Omit<User, "password">[]> {
+    const { email, phone, city, state, country, username, date_of_birth } =
+      filters;
+    const users = await prisma.users.findMany({
+      where: {
+        AND: [
+          email ? { email } : {},
+          phone ? { phone } : {},
+          city ? { city } : {},
+          state ? { state } : {},
+          country ? { country } : {},
+          username
+            ? { username: { contains: username, mode: "insensitive" } }
+            : {},
+          date_of_birth ? { date_of_birth } : {},
+        ],
+      },
+      select: {
+        username: true,
+        email: true,
+        phone: true,
+        street: true,
+        country: true,
+        nationality: true,
+        state: true,
+        city: true,
+        postal_code: true,
+        gender: true,
+        date_of_birth: true,
+        languages: true,
+      },
+    });
+
+    return users;
+  }
 }
