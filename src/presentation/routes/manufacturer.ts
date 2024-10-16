@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { adaptRoute } from "../../adapters/express-router-adapter";
-import { makeAddManufacturerController } from "../../infra/factory/controllers/add-manufacturer-controller-factory";
+import { makeAddManufacturerController } from "../../infra/factory/controllers/manufacturer/add-manufacturer-controller-factory";
 import { manufacturerValidatorMiddleware } from "../middlewares/manufacturer-validator";
 
 export const manufacturerRoutes = Router();
