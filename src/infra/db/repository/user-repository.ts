@@ -22,6 +22,10 @@ export class UsersRepository implements UserRepository {
     return user;
   }
 
+  async delete(user_id: string) {
+    await prisma.users.delete({ where: { id: user_id } });
+  }
+
   async loadByEmail(email: string): Promise<Omit<User, "password">> {
     const user = await prisma.users.findFirst({
       where: { email },
@@ -113,7 +117,6 @@ export class UsersRepository implements UserRepository {
         languages: true,
       },
     });
-
     return users;
   }
 }
