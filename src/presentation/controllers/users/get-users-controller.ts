@@ -1,8 +1,8 @@
 import { Request } from "express";
-import { GetUsers } from "../../../application/usecases/users/get-users-use-case";
 import { Controller, HttpResponse } from "../../../domains/controller";
 import { User } from "../../../domains/entities/users";
 import { HttpStatusCode } from "../../../domains/http";
+import { GetUsers } from "../../../domains/usecases/users/get-users-use-case";
 
 export class GetUsersController implements Controller {
   constructor(readonly getUsers: GetUsers) {}

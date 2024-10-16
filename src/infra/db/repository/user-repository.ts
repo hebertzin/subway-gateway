@@ -11,6 +11,16 @@ export class UsersRepository implements UserRepository {
     });
     return user;
   }
+  
+  async update(user_id: string, userData: Partial<User>): Promise<User> {
+    const user = await prisma.users.update({
+      where: { id: user_id },
+      data: {
+        ...userData,
+      },
+    });
+    return user;
+  }
 
   async loadByEmail(email: string): Promise<Omit<User, "password">> {
     const user = await prisma.users.findFirst({
