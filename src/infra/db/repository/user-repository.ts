@@ -33,6 +33,29 @@ export class UsersRepository implements UserRepository {
     return user;
   }
 
+  async loadById(id: string): Promise<Omit<User, "password">> {
+    const user = await prisma.users.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        username: true,
+        email: true,
+        phone: true,
+        street: true,
+        country: true,
+        nationality: true,
+        state: true,
+        city: true,
+        postal_code: true,
+        gender: true,
+        date_of_birth: true,
+        languages: true,
+      },
+    });
+    return user;
+  }
+
   async get(filters: Partial<User>): Promise<Omit<User, "password">[]> {
     const {
       email,
