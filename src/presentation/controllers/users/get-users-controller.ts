@@ -8,7 +8,7 @@ export class GetUsersController implements Controller {
   constructor(readonly getUsers: GetUsers) {}
   async handle(request: Request): Promise<HttpResponse> {
     try {
-      const filters = request.params as Partial<User>;
+      const filters = request.query as Partial<User>;
       const filteredUsers = await this.getUsers.execute(filters);
       return {
         msg: "Users retrieved successfully",
