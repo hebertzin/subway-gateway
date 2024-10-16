@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError, z } from "zod";
-import { HttpStatusCode } from "../../domain/http";
-import { Validator } from "../../domain/validator";
+import { HttpStatusCode } from "../../domains/http";
+import { Validator } from "../../domains/validator";
 
 export class ZodValidator<T> implements Validator<T> {
   private schema: z.ZodSchema<T>;

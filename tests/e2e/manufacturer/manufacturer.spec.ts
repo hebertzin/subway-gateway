@@ -1,7 +1,7 @@
 import supertest from "supertest";
 import { describe, expect, it } from "vitest";
 import { ExpressApp as app } from "../../../src/app";
-import { HttpStatusCode } from "../../../src/domain/http";
+import { HttpStatusCode } from "../../../src/domains/http";
 
 describe("POST /manufacturer", () => {
   it("Should create a manufacturer with valid data", async () => {

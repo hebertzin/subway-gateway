@@ -1,10 +1,9 @@
-import { User } from "../../../domain/entities/users";
-import { AddUserRepository } from "../../../domain/repository/users/add-user-repository";
-import { LoadUserByEmailRepository } from "../../../domain/repository/users/load-user-by-email";
+import { User } from "../../../domains/entities/users";
+import { UserRepository } from "../../../domains/repository/users/user-repository";
 import { prisma } from "../prisma-client";
 
-export class UserRepository implements AddUserRepository, LoadUserByEmailRepository {
-  async create(userData: User): Promise<User> {
+export class UsersRepository implements UserRepository {
+  async add(userData: User): Promise<User> {
     const user = await prisma.users.create({
       data: {
         ...userData,

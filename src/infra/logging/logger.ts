@@ -1,5 +1,5 @@
 import { Logger, createLogger, format, transports } from "winston";
-import { Logging } from "../../domain/logger";
+import { Logging } from "../../domains/logger";
 
 export class LoggerService implements Logging {
   private logger: Logger;

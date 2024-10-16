@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { AppError } from "../../../../src/application/errors/errors";
 import { AddManufacturerUseCase } from "../../../../src/application/usecases/manufacturer/add-manufacturer-use-case";
-import { Manufacturer } from "../../../../src/domain/entities/manufacturer";
-import { Logging } from "../../../../src/domain/logger";
-import { AddManufacturer } from "../../../../src/domain/usecases/manufacturer/add-manufacturer-use-case";
+import { Manufacturer } from "../../../../src/domains/entities/manufacturer";
+import { Logging } from "../../../../src/domains/logger";
+import { AddManufacturer } from "../../../../src/domains/usecases/manufacturer/add-manufacturer-use-case";
 
 const logger: Logging = {
   error: vi.fn(),

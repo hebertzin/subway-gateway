@@ -1,5 +1,5 @@
-import type { Manufacturer } from "../../../domain/entities/manufacturer";
-import { AddManufacturerRepository } from "../../../domain/repository/manufacturer/add-manufacturer-repository";
+import type { Manufacturer } from "../../../domains/entities/manufacturer";
+import { AddManufacturerRepository } from "../../../domains/repository/manufacturer/add-manufacturer-repository";
 import { prisma } from "../prisma-client";
 
 export class ManufacturerRepository implements AddManufacturerRepository {

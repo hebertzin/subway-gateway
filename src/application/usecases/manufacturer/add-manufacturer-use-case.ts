@@ -1,8 +1,8 @@
-import { Manufacturer } from "../../../domain/entities/manufacturer";
-import { HttpStatusCode } from "../../../domain/http";
-import { Logging } from "../../../domain/logger";
-import { AddManufacturerRepository } from "../../../domain/repository/manufacturer/add-manufacturer-repository";
-import { AddManufacturer } from "../../../domain/usecases/manufacturer/add-manufacturer-use-case";
+import { Manufacturer } from "../../../domains/entities/manufacturer";
+import { HttpStatusCode } from "../../../domains/http";
+import { Logging } from "../../../domains/logger";
+import { AddManufacturerRepository } from "../../../domains/repository/manufacturer/add-manufacturer-repository";
+import { AddManufacturer } from "../../../domains/usecases/manufacturer/add-manufacturer-use-case";
 import { AppError } from "../../errors/errors";
 
 export class AddManufacturerUseCase implements AddManufacturer {
