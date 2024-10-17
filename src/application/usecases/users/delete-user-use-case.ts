@@ -10,11 +10,11 @@ export class DeleteUserUseCase implements DeleteUser {
     readonly logging: Logging
   ) {}
   async execute(user_id: string): Promise<void> {
+    const user = await this.usersRepository.loadById(user_id);
+    if (!user) {
+      throw new UserNotFoundError("User not found", HttpStatusCode.NotFound);
+    }
     try {
-      const user = await this.usersRepository.loadById(user_id);
-      if (!user) {
-        throw new UserNotFoundError("User not found", HttpStatusCode.NotFound);
-      }
       await this.usersRepository.delete(user_id)
     } catch (error) {
       this.logging.error(`Error while delete user ${error}`);

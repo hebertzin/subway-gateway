@@ -14,12 +14,12 @@ export class UpdateUserUseCase implements UpdateUser {
   ) {}
 
   async execute(user_id: string, userData: Partial<User>): Promise<User> {
+    const existingUser = await this.userRepository.loadById(user_id);
+    if (!existingUser) {
+      this.logging.warn("User not found");
+      throw new UserNotFoundError("User not found", HttpStatusCode.NotFound);
+    }
     try {
-      const existingUser = await this.userRepository.loadById(user_id);
-      if (!existingUser) {
-        this.logging.warn("User not found");
-        throw new UserNotFoundError("User not found", HttpStatusCode.NotFound);
-      }
       if (userData.password) {
         userData.password = await this.hasher.hash(userData.password);
       }
