@@ -18,6 +18,9 @@ export class GetUserByIdUseCase implements GetUserById {
       }
       return user;
     } catch (error) {
+      if (error instanceof UserNotFoundError) {
+        throw error;
+      }
       this.logging.error(`Error while retrieve user ${error}`);
       throw new AppError(
         "Some error has been ocurred",

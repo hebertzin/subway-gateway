@@ -8,7 +8,6 @@ import { makeManufacturerRepositoryMock } from "../../../mocks/manufacture-repos
 const makeSut = () => {
   const manufacturerRepositoryMock = makeManufacturerRepositoryMock();
   const loggingMock = makeLoggingMock();
-
   const sut = new AddManufacturerUseCase(
     manufacturerRepositoryMock,
     loggingMock
