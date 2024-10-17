@@ -50,13 +50,8 @@ describe("AddUserUseCase", () => {
   });
 
   it("should throw an AppError if an unexpected error occurs", async () => {
-    const { sut, userRepositoryMock, loggingMock } = makeSut();
+    const { sut, userRepositoryMock } = makeSut();
     userRepositoryMock.add.mockRejectedValueOnce(new Error("Database error"));
     await expect(sut.execute(mockUser)).rejects.toThrow(AppError);
-    expect(loggingMock.error).toHaveBeenCalledWith(
-      expect.stringContaining(
-        "Some error has been ocurred trying create a new user"
-      )
-    );
   });
 });

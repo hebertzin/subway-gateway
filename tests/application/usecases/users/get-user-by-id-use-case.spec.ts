@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
-      AppError,
-      UserNotFoundError,
+  AppError,
+  UserNotFoundError,
 } from "../../../../src/application/errors/errors";
 import { GetUserByIdUseCase } from "../../../../src/application/usecases/users/get-user-by-id";
 import { makeLoggingMock } from "../../../mocks/logging-mock";

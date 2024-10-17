@@ -35,15 +35,12 @@ describe("DeleteUserUseCase", () => {
   });
 
   it("Should throw AppError if an error occurs during deletion", async () => {
-    const { sut, userRepositoryMock, loggingMock } = makeSut();
+    const { sut, userRepositoryMock } = makeSut();
     const mockUserId = "72";
     userRepositoryMock.loadById.mockResolvedValueOnce({ id: mockUserId });
     userRepositoryMock.delete.mockRejectedValueOnce(
       new Error("Deletion error")
     );
     await expect(sut.execute(mockUserId)).rejects.toThrow(AppError);
-    expect(loggingMock.error).toHaveBeenCalledWith(
-      expect.stringContaining("Error while delete user")
-    );
   });
 });

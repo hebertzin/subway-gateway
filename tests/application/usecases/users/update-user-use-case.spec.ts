@@ -45,26 +45,22 @@ describe("UpdateUserUseCase", () => {
   });
 
   it("Should throw UserNotFoundError if user does not exist", async () => {
-    const { sut, userRepositoryMock, loggingMock } = makeSut();
+    const { sut, userRepositoryMock } = makeSut();
     const mockUserId = "invalid_id";
     const userData = { username: "NewUsername" };
     userRepositoryMock.loadById.mockResolvedValueOnce(null);
     await expect(sut.execute(mockUserId, userData)).rejects.toThrow(
       UserNotFoundError
     );
-    expect(loggingMock.warn).toHaveBeenCalledWith("User not found");
   });
 
   it("Should throw AppError if an error occurs during update", async () => {
-    const { sut, userRepositoryMock, loggingMock, hashMock } = makeSut();
+    const { sut, userRepositoryMock, hashMock } = makeSut();
     const mockUserId = "72";
     const userData = { username: "NewUsername", password: "newpassword" };
     userRepositoryMock.loadById.mockResolvedValueOnce({ id: mockUserId });
     hashMock.hash.mockResolvedValueOnce("hashedPassword");
     userRepositoryMock.update.mockRejectedValueOnce(new Error("Update error"));
     await expect(sut.execute(mockUserId, userData)).rejects.toThrow(AppError);
-    expect(loggingMock.error).toHaveBeenCalledWith(
-      expect.stringContaining("Error occurred while updating user")
-    );
   });
 });

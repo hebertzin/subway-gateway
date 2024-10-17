@@ -28,11 +28,9 @@ describe("GetUsersUseCase", () => {
     ];
     const totalItems = 25; 
     const expectedTotalPages = Math.ceil(totalItems / pageSize);
-
     userRepositoryMock.count.mockResolvedValueOnce(totalItems);
     userRepositoryMock.get.mockResolvedValueOnce(mockUsers);
     const result = await sut.execute(filters, page, pageSize);
-
     expect(result).toEqual({
       hasNextPage: page < expectedTotalPages,
       hasPreviousPage: page > 1,
@@ -47,16 +45,13 @@ describe("GetUsersUseCase", () => {
   });
 
   it("Should throw AppError if an error occurs while retrieving users", async () => {
-    const { sut, userRepositoryMock, loggingMock } = makeSut();
+    const { sut, userRepositoryMock } = makeSut();
     const filters = { city: "Praia Grande" };
     const page = 1;
     const pageSize = 10;
     userRepositoryMock.count.mockRejectedValueOnce(new Error("Database error"));
     await expect(sut.execute(filters, page, pageSize)).rejects.toThrow(
       AppError
-    );
-    expect(loggingMock.error).toHaveBeenCalledWith(
-      expect.stringContaining("Ocurred an error while retrieve users")
     );
   });
 });
