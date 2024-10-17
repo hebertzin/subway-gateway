@@ -49,4 +49,48 @@ describe("/api/v1/users", () => {
       statusCode: HttpStatusCode.Conflict,
     });
   });
+
+  it("Should return validation errors for invalid user data", async () => {
+    const incompleteData = {
+      username: "",
+      password: "",
+      email: "",
+      phone: "",
+      street: "",
+      country: "",
+      nationality: "",
+      state: "",
+      city: "",
+      postal_code: "",
+      gender: "",
+      date_of_birth: "",
+      languages: "",
+    };
+
+    const response = await supertest(new app().getApp())
+      .post("/api/v1/users")
+      .send(incompleteData)
+      .expect(HttpStatusCode.BadRequest);
+
+    expect(response.body).toMatchObject({
+      error: "Invalid data",
+      details: expect.arrayContaining([
+        { message: "Username is required" },
+        { message: "Password must be at least 6 characters long" },
+        { message: "Invalid email address" },
+        { message: "Email is required" },
+        { message: "Phone number must be at least 10 digits" },
+        { message: "Phone number must be in the format (XX) XXXXX-XXXX or (XX) XXXX-XXXX" },
+        { message: "Street is required" },
+        { message: "Country is required" },
+        { message: "Nationality is required" },
+        { message: "City is required" },
+        { message: "Postal code must be at least 5 characters long" },
+        { message: "Postal code must be in the format XXXXX-XXX" },
+        { message: "Gender is required" },
+        { message: "Date of birth must be in the format DD/MM/YY" },
+        { message: "Languages is required" },
+      ]),
+    });
+  });
 });
