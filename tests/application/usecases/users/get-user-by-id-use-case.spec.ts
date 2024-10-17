@@ -18,7 +18,7 @@ const makeSut = () => {
   };
 };
 
-describe("", () => {
+describe("GetUserByIdUseCase", () => {
   it("Should find user correctly", async () => {
     const mockUser = {
       id: "72",
