@@ -13,17 +13,18 @@ export class AddUserUseCase implements AddUser {
     readonly hasher: Hasher
   ) {}
   async execute(userData: User): Promise<User> {
-    try {
-      const existentUser = await this.userRepository.loadByEmail(
-        userData.email
+    const existentUser = await this.userRepository.loadByEmail(
+      userData.email
+    );
+    if (existentUser) {
+      this.logging.warn("Could not create user because it already exists");
+      throw new UserAlreadyExistError(
+        "User already exists",
+        HttpStatusCode.Conflict
       );
-      if (existentUser) {
-        this.logging.warn("Could not create user because it already exists");
-        throw new UserAlreadyExistError(
-          "User already exists",
-          HttpStatusCode.Conflict
-        );
-      }
+    }
+    try {
+    
       const passwordHashed = await this.hasher.hash(userData.password);
       const updatedUserData = { ...userData, password: passwordHashed };
       const user = await this.userRepository.add(updatedUserData);

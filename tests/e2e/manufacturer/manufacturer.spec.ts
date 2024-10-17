@@ -21,21 +21,19 @@ describe("POST /manufacturer", () => {
       .send(manufacturerData)
       .expect(HttpStatusCode.Created);
     expect(response.body).toMatchObject({
-      data: {
-        msg: "Manufacturer created successfully",
-        statusCode: HttpStatusCode.Created,
-        body: expect.objectContaining({
-          name: manufacturerData.name,
-          phone: manufacturerData.phone,
-          email: manufacturerData.email,
-          street: manufacturerData.street,
-          number: manufacturerData.number,
-          city: manufacturerData.city,
-          state: manufacturerData.state,
-          zip_code: manufacturerData.zip_code,
-          website: manufacturerData.website,
-        }),
-      },
+      message: "Manufacturer created successfully",
+      statusCode: HttpStatusCode.Created,
+      data: expect.objectContaining({
+        name: manufacturerData.name,
+        phone: manufacturerData.phone,
+        email: manufacturerData.email,
+        street: manufacturerData.street,
+        number: manufacturerData.number,
+        city: manufacturerData.city,
+        state: manufacturerData.state,
+        zip_code: manufacturerData.zip_code,
+        website: manufacturerData.website,
+      }),
     });
   });
 
