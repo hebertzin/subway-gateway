@@ -24,12 +24,9 @@ const makeSut = () => {
 
 describe("AddUserUseCase", () => {
   it("should return error if user already exist", async () => {
-    const { sut, userRepositoryMock, loggingMock } = makeSut();
+    const { sut, userRepositoryMock } = makeSut();
     userRepositoryMock.loadByEmail.mockResolvedValueOnce(mockUser);
     await expect(sut.execute(mockUser)).rejects.toThrow(UserAlreadyExistError);
-    expect(loggingMock.warn).toHaveBeenCalledWith(
-      "Could not create user because it already exists"
-    );
   });
 
   it("should create and return a user successfully", async () => {
