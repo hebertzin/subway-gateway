@@ -1,6 +1,5 @@
-import { z } from 'zod';
-import { brazilianPhoneRegex, brazilianZipCodeRegex } from '../utils/regex';
-
+import { z } from "zod";
+import { brazilianPhoneRegex, brazilianZipCodeRegex } from "../utils/regex";
 
 export const userSchemaValidation = z.object({
   username: z
@@ -17,7 +16,8 @@ export const userSchemaValidation = z.object({
     .string({ message: "Phone must be a string" })
     .min(10, { message: "Phone number must be at least 10 digits" })
     .regex(brazilianPhoneRegex, {
-      message: "Phone number must be in the format (XX) XXXXX-XXXX or (XX) XXXX-XXXX",
+      message:
+        "Phone number must be in the format (XX) XXXXX-XXXX or (XX) XXXX-XXXX",
     }),
   street: z
     .string({ message: "Street must be a string" })
@@ -43,12 +43,11 @@ export const userSchemaValidation = z.object({
   gender: z
     .string({ message: "Gender must be a string" })
     .min(1, { message: "Gender is required" }),
-  date_of_birth: z
-    .string({ message: "Date of birth must be a string" })
-    .regex(
-      /^\d{2}\/\d{2}\/\d{2}$/,
-      { message: "Date of birth must be in the format DD/MM/YY" }
-    ),
+  date_of_birth: z.string({ message: "Date of birth must be a string" }).regex(
+    /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+
+    { message: "Date of birth must be in the format DD/MM/YY" }
+  ),
   languages: z
     .string({ message: "Languages must be a string" })
     .min(1, { message: "Languages is required" }),
