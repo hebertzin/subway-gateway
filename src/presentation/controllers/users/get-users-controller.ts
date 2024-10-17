@@ -8,12 +8,18 @@ export class GetUsersController implements Controller {
   constructor(readonly getUsers: GetUsers) {}
   async handle(request: Request): Promise<HttpResponse> {
     try {
+      const page = Number(request.query.page) || 1;
+      const pageSize = Number(request.query.limit) || 20;
       const filters = request.query as Partial<User>;
-      const filteredUsers = await this.getUsers.execute(filters);
+      const filteredUsers = await this.getUsers.execute(
+        filters,
+        page,
+        pageSize
+      );
       return {
-        msg: "Users retrieved successfully",
-        statusCode: HttpStatusCode.Ok,
+        msg: "Users retrieved sucessfully",
         body: filteredUsers,
+        statusCode: HttpStatusCode.Ok,
       };
     } catch (error) {
       return {

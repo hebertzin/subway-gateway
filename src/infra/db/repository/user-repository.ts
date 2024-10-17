@@ -70,7 +70,7 @@ export class UsersRepository implements UserRepository {
     return user;
   }
 
-  async get(filters: Partial<User>): Promise<Omit<User, "password">[]> {
+  async get(filters: Partial<User>, skip: number, take: number): Promise<Omit<User, "password">[]> {
     const {
       email,
       phone,
@@ -82,7 +82,8 @@ export class UsersRepository implements UserRepository {
       languages,
       gender,
     } = filters;
-    const users = await prisma.users.findMany({
+
+    return await prisma.users.findMany({
       where: {
         AND: [
           email ? { email } : {},
@@ -102,6 +103,8 @@ export class UsersRepository implements UserRepository {
           gender ? { gender: { contains: gender, mode: "insensitive" } } : {},
         ],
       },
+      skip: skip,
+      take: take,
       select: {
         username: true,
         email: true,
@@ -117,6 +120,41 @@ export class UsersRepository implements UserRepository {
         languages: true,
       },
     });
-    return users;
+  }
+
+  async count(filters: Partial<User>): Promise<number> {
+    const {
+      email,
+      phone,
+      city,
+      state,
+      country,
+      username,
+      date_of_birth,
+      languages,
+      gender,
+    } = filters;
+
+    return await prisma.users.count({
+      where: {
+        AND: [
+          email ? { email } : {},
+          phone ? { phone } : {},
+          city ? { city: { contains: city, mode: "insensitive" } } : {},
+          state ? { state: { contains: state, mode: "insensitive" } } : {},
+          country
+            ? { country: { contains: country, mode: "insensitive" } }
+            : {},
+          username
+            ? { username: { contains: username, mode: "insensitive" } }
+            : {},
+          date_of_birth ? { date_of_birth } : {},
+          languages
+            ? { languages: { contains: languages, mode: "insensitive" } }
+            : {},
+          gender ? { gender: { contains: gender, mode: "insensitive" } } : {},
+        ],
+      },
+    });
   }
 }
