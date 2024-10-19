@@ -2,7 +2,7 @@ import { Router } from "express";
 import { adaptRoute } from "../../adapters/express-router-adapter";
 import { makeAddUserController } from "../../infra/factory/controllers/users/add-user-controller-factory";
 import { makeDeleteUserController } from "../../infra/factory/controllers/users/delete-user-controller-factory";
-import { makeGetUserByIdController } from "../../infra/factory/controllers/users/get-user-by-id-controller-factory]";
+import { makeGetUserByIdController } from "../../infra/factory/controllers/users/get-user-by-id-controller-factory";
 import { makeGetUsersController } from "../../infra/factory/controllers/users/get-users-controller-factory";
 import { makeUpdateUserController } from "../../infra/factory/controllers/users/update-user-controller-factory";
 import { usersValidatorMiddleware } from "../middlewares/users-validator";

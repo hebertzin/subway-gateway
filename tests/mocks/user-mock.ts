@@ -3,7 +3,7 @@ import { User } from "../../src/domains/entities/users";
 export const mockUser: User = {
   username: "Hebert",
   password: "20304050",
-  email: "hebert@gmail.com.com",
+  email: "hebertzin@gmail.com.com",
   phone: "(13) 99661-2070",
   street: "Rua dos Fundos",
   country: "Brasil",
